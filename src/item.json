@@ -1,0 +1,7 @@
+{
+  "name": "button name",
+  "type": "audio, video, effect",
+  "filename": "eg: file.png",
+  "color": "#000000",
+  "icon": "eg: icon.png"
+}
