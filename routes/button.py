@@ -3,7 +3,7 @@ from models.Button import Button
 from sqlmodel import session, select
 from database import engine
 
-app = Flask(__name__)
+button_bp = Blueprint("button", +__name__)
 
 @app.route("/")
 def deck():
