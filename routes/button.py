@@ -9,26 +9,30 @@ button_bp = Blueprint("button", +__name__)
 def deck():
     return render_template("deck.html")
 
-@app.post("/insertItem")
-def insertItem():
+@button_bp.route("/item", methods=["POST"])
+def insert_item():
     item = request.json
     try:
 
-        return f'added item {item}', 200
+        return f"added item {item}", 200
     except:
         return 400
 
 
-@app.get("/readItem/<ID>")
-def readItem(ID):
+@button_bp.route("/item/<ID>", methods=["GET"])
+def read_item(ID):
     print(ID)
-    return '200'
+    return 200
 
-app.put("/updateItem")
-def updateItem():
+@button_bp.route("/item", methods=["PATCH"])
+def update_item():
     item = request.json
 
     try:
-        return f'updated item {item}', 200
+        return f"updated item {item}", 200
     except:
         return 400
+
+@button_bp.route("/item", methods=["DELETE"])
+def delete_item():
+    pass
