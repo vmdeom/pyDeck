@@ -6,4 +6,6 @@ class Button(SQLModel, table=True):
     effect_type: str
     effect_dir: str
     name: str
+    color: str
+    icon: str
     code: str = Field(unique=True)
