@@ -1,38 +1,74 @@
 from flask import Blueprint, request, jsonify
 from models.Button import Button
-from sqlmodel import session, select
+from sqlmodel import Session, select
 from database import engine
 
-button_bp = Blueprint("button", +__name__)
-
-@app.route("/")
-def deck():
-    return render_template("deck.html")
+button_bp = Blueprint("button", __name__)
 
 @button_bp.route("/item", methods=["POST"])
-def insert_item():
-    item = request.json
+def post_button():
+    button_data = request.json
+    button = Button(**button_data)
     try:
+        with Session(engine) as session:
+            session.add(button)
+            session.commit()
+            session.refresh(button)
+        
+        return jsonify(button.dict()), 200
+    
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
 
-        return f"added item {item}", 200
-    except:
-        return 400
 
+@button_bp.route("/item/<code>", methods=["GET"])
+def get_button(code: str):
+    with Session(engine) as session:
+        query = select(Button).where(Button.code == code)
+        button = session.exec(query).first()
+        if button:
+            return jsonify(button.dict()), 200
 
-@button_bp.route("/item/<ID>", methods=["GET"])
-def read_item(ID):
-    print(ID)
-    return 200
+    return jsonify({"error": "not found"}), 404
 
-@button_bp.route("/item", methods=["PATCH"])
-def update_item():
-    item = request.json
+@button_bp.route("/item/<code>", methods=["PATCH"])
+def patch_button(code: str):
 
+    button_data = request.json
+
+    with Session(engine) as session:
+        query = select(Button).where(Button.code == code)
+        button = session.exec(query).first()
+        
+        if not button:
+            return jsonify({"error": "not found"}), 404
+
+        for key, value in button_data.items():
+            if hasattr(button, key):
+                setattr(button, key, value)
+        
+        session.add(button)
+        session.commit()
+        session.refresh(button)
+
+        return jsonify(button.dict()), 200
+    
+    return jsonify({"error": "not found"}), 404
+
+@button_bp.route("/item/<code>", methods=["DELETE"])
+def delete_button(code: str):
     try:
-        return f"updated item {item}", 200
-    except:
-        return 400
+        with Session(engine) as session:
+            query = select(Button).where(Button.code == code)
+            button = session.exec(query).first()
 
-@button_bp.route("/item", methods=["DELETE"])
-def delete_item():
-    pass
+            if not button:
+                return jsonify({"error": "not found"}), 404
+            
+            session.delete(button)
+            session.commit()
+
+        return jsonify(button.dict(), 200)
+    
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
