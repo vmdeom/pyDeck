@@ -10,6 +10,13 @@
 }
 
 .inner{
-    width: 90%;
-    height: 90%;
+    display: grid;
+    grid-template-columns: 256px 256px 256px 256px 256px;
+    grid-template-rows: 256px 256px;
+}
+
+.deckButton{
+    border: 1px solid red;
+    padding: 25%;
+    margin: 5%;
 }
