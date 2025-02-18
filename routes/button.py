@@ -31,6 +31,21 @@ def get_button(code: str):
 
     return jsonify({"error": "not found"}), 404
 
+@button_bp.route("/items", methods=["GET"])
+def get_buttons():
+    with Session(engine) as session:
+        buttons = session.exec(select(Button)).all()
+        if buttons:
+            return [{     
+                "effect_type": button.effect_type,
+                "effect_dir": button.effect_dir,
+                "name": button.name,
+                "color": button.color,
+                "icon": button.icon,
+                "page": button.page,
+                "code": button.code} for button in buttons], 200
+        return jsonify({"error": "not found"}), 404
+
 @button_bp.route("/item/<code>", methods=["PATCH"])
 def patch_button(code: str):
 

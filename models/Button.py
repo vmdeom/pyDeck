@@ -8,4 +8,5 @@ class Button(SQLModel, table=True):
     name: str
     color: str
     icon: str
+    page: int
     code: str = Field(unique=True)

@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="./styles/style.css">
-    <script src="./scripts/script.js"></script>
+    <title>Deck</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </head>
 <body>
     <div class="container">
-        <div id="main" class="container inner">
-            <div class="deckButton">
+        <div id="buttonContainer" class="container inner">
+            <div class="deckButton" data-action="this the one">
             </div>
             <div class="deckButton">
             </div>
@@ -31,5 +31,6 @@
             </div>
         </div>
     </div>
+
 </body>
 </html>
