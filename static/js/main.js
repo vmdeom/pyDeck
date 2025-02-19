@@ -1,4 +1,5 @@
 async function loadButtons(){
+    
     let response = await fetch("/items");
     let buttons = await response.json();
 
@@ -8,6 +9,13 @@ async function loadButtons(){
 
     let totalButtons = buttons.length;
     let emptyButtonsNeeded = 10 - totalButtons;
+
+    createButtons(buttons, container);
+    createEmptyButtons(emptyButtonsNeeded, container);
+
+}
+
+function createButtons(buttons, container){
 
     buttons.forEach(button => {
         let div = document.createElement("div");
@@ -20,10 +28,13 @@ async function loadButtons(){
 
        
         div.addEventListener("click", function(){
-            console.log(this.dataset.action)
+            console.log(this.dataset.action);
         })
     })
+}
 
+function createEmptyButtons(emptyButtonsNeeded, container){
+    
     for(let i = 0; i < emptyButtonsNeeded; i++){
         let emptyButton = document.createElement("div");
 
