@@ -16,7 +16,13 @@
 }
 
 .deckButton{
-    border: 1px solid red;
+    border: 1px solid blue;
+    background-color: lightblue;
     padding: 25%;
     margin: 5%;
+}
+
+.emptyButton{
+    border: 1px solid red;
+    background-color: pink;
 }
