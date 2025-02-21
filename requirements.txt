@@ -1,3 +1,6 @@
 Flask
 sqlmodel
 requests
+pytest
+pytest-cov
+flask-testing
