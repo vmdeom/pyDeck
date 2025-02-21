@@ -3,4 +3,4 @@ sqlmodel
 requests
 pytest
 pytest-cov
-flask-testing
+flask-testing   

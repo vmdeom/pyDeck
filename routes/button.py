@@ -5,7 +5,7 @@ from database import engine
 
 button_bp = Blueprint("button", __name__)
 
-@button_bp.route("/item", methods=["POST"])
+@button_bp.route("/button", methods=["POST"])
 def post_button():
     button_data = request.json
     button = Button(**button_data)
@@ -21,7 +21,7 @@ def post_button():
         return jsonify({"error": str(e)}), 400
 
 
-@button_bp.route("/item/<code>", methods=["GET"])
+@button_bp.route("/button/<code>", methods=["GET"])
 def get_button(code: str):
     with Session(engine) as session:
         query = select(Button).where(Button.code == code)
@@ -31,7 +31,7 @@ def get_button(code: str):
 
     return jsonify({"error": "not found"}), 404
 
-@button_bp.route("/items", methods=["GET"])
+@button_bp.route("/get_buttons", methods=["GET"])
 def get_buttons():
     with Session(engine) as session:
         buttons = session.exec(select(Button)).all()
@@ -46,7 +46,7 @@ def get_buttons():
                 "code": button.code} for button in buttons], 200
         return jsonify({"error": "not found"}), 404
 
-@button_bp.route("/item/<code>", methods=["PATCH"])
+@button_bp.route("/button/<code>", methods=["PATCH"])
 def patch_button(code: str):
 
     button_data = request.json
@@ -70,7 +70,7 @@ def patch_button(code: str):
     
     return jsonify({"error": "not found"}), 404
 
-@button_bp.route("/item/<code>", methods=["DELETE"])
+@button_bp.route("/button/<code>", methods=["DELETE"])
 def delete_button(code: str):
     try:
         with Session(engine) as session:
