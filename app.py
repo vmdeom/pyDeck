@@ -14,7 +14,7 @@ def hello_world():
 
 @app.route("/deck")
 def deck():
-    return render_template('deck/deck.html')
+    return render_template("deck/deck.html")
 
 if __name__ == "__main__":
     app.run(debug=True)

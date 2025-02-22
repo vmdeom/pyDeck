@@ -1,0 +1,44 @@
+name: CI Pipeline
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v3
+
+      - name: Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.13.1"
+
+      - name: Instalar dependências Python
+        run: |
+          pip install -r requirements.txt
+          pip install pytest pytest-cov flask-testing
+
+      - name: Rodar testes Python
+        run: pytest --cov=app
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "22.14.0"
+
+      - name: Instalar dependências JS
+        run: npm install
+
+      - name: Rodar testes JavaScript
+        run: npx jest
+
+      - name: Rodar testes Cypress
+        run: npx cypress run
+      
+      - name: Rodar Pylint
+        run: pylint .
+      
+      - name: Rodar ESLint
+        run: npx eslint static/js/

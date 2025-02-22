@@ -3,4 +3,5 @@ sqlmodel
 requests
 pytest
 pytest-cov
+pylint
 flask-testing   

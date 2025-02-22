@@ -3,7 +3,7 @@ import { createEmptyButtons } from "./create_empty_buttons.js"
 
 async function loadButtons(){
     
-    let response = await fetch("/items");
+    let response = await fetch("/get_buttons");
     let buttons = await response.json();
 
     let container = document.getElementById("buttonContainer");
