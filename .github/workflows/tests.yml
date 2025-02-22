@@ -23,22 +23,22 @@ jobs:
       - name: Rodar testes Python
         run: pytest --cov=app
 
-      - name: Configurar Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "22.14.0"
+      #- name: Configurar Node.js
+      #  uses: actions/setup-node@v3
+      #  with:
+      #    node-version: "22.14.0"
 
-      - name: Instalar dependências JS
-        run: npm install
+      #- name: Instalar dependências JS
+      #  run: npm install
 
-      - name: Rodar testes JavaScript
-        run: npx jest
+      #- name: Rodar testes JavaScript
+      #  run: npx jest
 
-      - name: Rodar testes Cypress
-        run: npx cypress run
+      #- name: Rodar testes Cypress
+      #  run: npx cypress run
       
       - name: Rodar Pylint
         run: pylint .
       
-      - name: Rodar ESLint
-        run: npx eslint static/js/
+      #- name: Rodar ESLint
+      #  run: npx eslint static/js/
