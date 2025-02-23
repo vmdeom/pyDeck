@@ -38,7 +38,7 @@ jobs:
       #  run: npx cypress run
       
       - name: Rodar Pylint
-        run: pylint -- fail=under=5 .
+        run: pylint --fail-under=5 .
       
       #- name: Rodar ESLint
       #  run: npx eslint static/js/
