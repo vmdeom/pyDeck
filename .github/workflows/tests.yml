@@ -7,38 +7,38 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout código
+      - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Configurar Python
+      - name: Python Setup
         uses: actions/setup-python@v4
         with:
           python-version: "3.13.1"
 
-      - name: Instalar dependências Python
+      - name: Install Python Dependencies
         run: |
           pip install -r requirements.txt
           pip install pytest pytest-cov flask-testing
 
-      - name: Rodar testes Python
+      - name: Run Python tests
         run: pytest --cov=app
 
-      #- name: Configurar Node.js
+      - name: Run Pylint
+        run: pylint --fail-under=5 .
+
+      #- name: Node.js Setup
       #  uses: actions/setup-node@v3
       #  with:
       #    node-version: "22.14.0"
 
-      #- name: Instalar dependências JS
+      #- name: Install JS Dependencies
       #  run: npm install
 
-      #- name: Rodar testes JavaScript
+      #- name: Run JavaScript tests
       #  run: npx jest
 
-      #- name: Rodar testes Cypress
+      #- name: Run Cypress tests
       #  run: npx cypress run
       
-      - name: Rodar Pylint
-        run: pylint --fail-under=5 .
-      
-      #- name: Rodar ESLint
+      #- name: Run ESLint
       #  run: npx eslint static/js/
