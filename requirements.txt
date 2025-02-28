@@ -1,6 +1,8 @@
 Flask
-sqlmodel
-requests
+flask-testing 
+pydantic
+pylint
 pytest
 pytest-cov
-flask-testing   
+requests 
+sqlmodel
